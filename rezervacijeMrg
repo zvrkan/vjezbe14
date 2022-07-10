@@ -1,0 +1,74 @@
+<?php
+
+// RezervacijeMgr.php
+
+class RezervacijeMgr
+{
+    protected $rezervacije = array();
+    private static $instance;
+
+    public function getRezervacije()
+    {
+        return $this->rezervacije;
+    }
+
+    protected function setRezervacija($param)
+    {
+        if($this->checkDostupnost($param))
+        {
+            $this->rezervacije[] = $param;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    protected function checkDostupnost($param)
+    {
+        foreach($this->rezervacije as $key => $rezervacija)
+        {
+            if($rezervacija->getDatum() == $param->getDatum())
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function upisivanje()
+    {
+        while(true)
+        {
+            $rezervacija = new Rezervacija();
+
+            if(!$this->setRezervacija($rezervacija))
+            {
+                echo "Nije mogu unijeti rezervaciju za odabrani datum!\n";
+            }
+            else
+            {
+                $check = readline("Da li zelite unijeti jos koju rezervaciju (d/n): ");
+
+                if($check == "n" || $check == "N")
+                {
+                    break;
+                }
+            }
+        }
+    }
+
+    public static function getInstance()
+    {
+        if(!self::$instance)
+        {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+}
+
+?>
