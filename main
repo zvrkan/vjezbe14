@@ -1,0 +1,12 @@
+<?php
+
+// main.php
+
+include("RezervacijeMgr.php");
+include("Rezervacija.php");
+
+$RezMgr = RezervacijeMgr::getInstance();
+
+$RezMgr->upisivanje()
+
+?>
