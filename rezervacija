@@ -1,0 +1,37 @@
+<?php
+
+// Rezervacija.php
+
+class Rezervacija
+{
+    protected $naziv;
+    protected $datum;
+
+    public function __construct()
+    {
+        $this->setNaziv();
+        $this->setDatum();
+    }
+
+    public function getNaziv()
+    {
+        return $this->naziv;
+    }
+
+    protected function setNaziv()
+    {
+        $this->naziv = readline("Naziv rezervacije: ");
+    }
+
+    public function getDatum()
+    {
+        return $this->datum;
+    }
+    
+    protected function setDatum()
+    {
+        $this->datum = readline("Datum rezervacije (YYYY-MM-DD): ");
+    }
+}
+
+?>
